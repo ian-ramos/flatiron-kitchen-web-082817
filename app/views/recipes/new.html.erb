@@ -1,0 +1,9 @@
+<%= form_for @recipe do |f| %>
+  Name: <%= f.text_field :name %>
+  Ingredients: <% Ingredient.all.each do |ingredient| %>
+    <%= f.label :ingredients, {value: "#{ingredient.name}"} %>
+    <%= f.check_box :ingredients, {name: "recipe[ingredient_ids][]", id: "#{ingredient.name}"},  "#{ingredient.id}", false %>
+    <!-- because we have this name :ingredients, we don't need a getter method.  In fact, we also already have a ingredient_ids method premade -->
+  <% end %>
+  <%= f.submit %>
+<% end %>
